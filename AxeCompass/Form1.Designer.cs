@@ -273,7 +273,7 @@ namespace AxeCompass
             // 
             // AxeLengthTextBox
             // 
-            this.AxeLengthTextBox.BackColor = System.Drawing.Color.Red;
+            this.AxeLengthTextBox.BackColor = System.Drawing.Color.White;
             this.AxeLengthTextBox.Location = new System.Drawing.Point(15, 50);
             this.AxeLengthTextBox.Name = "AxeLengthTextBox";
             this.AxeLengthTextBox.Size = new System.Drawing.Size(258, 20);
