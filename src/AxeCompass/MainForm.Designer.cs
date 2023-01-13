@@ -1,7 +1,7 @@
 ﻿
-namespace AxeCompass
+namespace AxeCompas.View
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -29,6 +29,7 @@ namespace AxeCompass
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@ namespace AxeCompass
             this.AxeLengthTextBox = new System.Windows.Forms.TextBox();
             this.AxeLengthLabel = new System.Windows.Forms.Label();
             this.ParametersLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MaximumButton = new System.Windows.Forms.Button();
             this.AverageButton = new System.Windows.Forms.Button();
             this.MinimumButton = new System.Windows.Forms.Button();
@@ -60,6 +62,7 @@ namespace AxeCompass
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -96,13 +99,14 @@ namespace AxeCompass
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel2.Controls.Add(this.MaximumButton);
             this.splitContainer1.Panel2.Controls.Add(this.AverageButton);
             this.splitContainer1.Panel2.Controls.Add(this.MinimumButton);
             this.splitContainer1.Panel2.Controls.Add(this.BuildButton);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(832, 482);
-            this.splitContainer1.SplitterDistance = 276;
+            this.splitContainer1.Size = new System.Drawing.Size(879, 587);
+            this.splitContainer1.SplitterDistance = 291;
             this.splitContainer1.TabIndex = 0;
             // 
             // label14
@@ -299,9 +303,21 @@ namespace AxeCompass
             this.ParametersLabel.Text = "Parameters";
             this.ParametersLabel.Click += new System.EventHandler(this.label1_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(46, 21);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(442, 488);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // MaximumButton
             // 
-            this.MaximumButton.Location = new System.Drawing.Point(165, 447);
+            this.MaximumButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.MaximumButton.Location = new System.Drawing.Point(175, 551);
             this.MaximumButton.Name = "MaximumButton";
             this.MaximumButton.Size = new System.Drawing.Size(75, 23);
             this.MaximumButton.TabIndex = 3;
@@ -311,7 +327,8 @@ namespace AxeCompass
             // 
             // AverageButton
             // 
-            this.AverageButton.Location = new System.Drawing.Point(84, 447);
+            this.AverageButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.AverageButton.Location = new System.Drawing.Point(94, 551);
             this.AverageButton.Name = "AverageButton";
             this.AverageButton.Size = new System.Drawing.Size(75, 23);
             this.AverageButton.TabIndex = 2;
@@ -321,7 +338,8 @@ namespace AxeCompass
             // 
             // MinimumButton
             // 
-            this.MinimumButton.Location = new System.Drawing.Point(3, 447);
+            this.MinimumButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.MinimumButton.Location = new System.Drawing.Point(13, 551);
             this.MinimumButton.Name = "MinimumButton";
             this.MinimumButton.Size = new System.Drawing.Size(75, 23);
             this.MinimumButton.TabIndex = 1;
@@ -331,7 +349,8 @@ namespace AxeCompass
             // 
             // BuildButton
             // 
-            this.BuildButton.Location = new System.Drawing.Point(465, 447);
+            this.BuildButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildButton.Location = new System.Drawing.Point(484, 551);
             this.BuildButton.Name = "BuildButton";
             this.BuildButton.Size = new System.Drawing.Size(75, 23);
             this.BuildButton.TabIndex = 0;
@@ -339,19 +358,21 @@ namespace AxeCompass
             this.BuildButton.UseVisualStyleBackColor = true;
             this.BuildButton.Click += new System.EventHandler(this.BuildButton_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 482);
+            this.ClientSize = new System.Drawing.Size(879, 587);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainForm";
+            this.Text = "AxePlugin";
+            this.Load += new System.EventHandler(this.AxeForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -385,6 +406,7 @@ namespace AxeCompass
         private System.Windows.Forms.Button MaximumButton;
         private System.Windows.Forms.Button AverageButton;
         private System.Windows.Forms.Button MinimumButton;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
