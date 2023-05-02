@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxeKompas.View", "Axe3D\AxeKompas.View.csproj", "{CBF52361-D30B-4C6D-BA24-AA228AA2970E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{75A53E08-63ED-43C7-BD5D-082671EFB70A} = {75A53E08-63ED-43C7-BD5D-082671EFB70A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxeKompas.Model", "AxeKompas.Model\AxeKompas.Model.csproj", "{75A53E08-63ED-43C7-BD5D-082671EFB70A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxeKompas.Wrapper", "AxeKompas.Wrapper\AxeKompas.Wrapper.csproj", "{7042EC2F-DEF9-4FF3-AEEF-97E8C2D0E60B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{75A53E08-63ED-43C7-BD5D-082671EFB70A} = {75A53E08-63ED-43C7-BD5D-082671EFB70A}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBF52361-D30B-4C6D-BA24-AA228AA2970E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF52361-D30B-4C6D-BA24-AA228AA2970E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF52361-D30B-4C6D-BA24-AA228AA2970E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF52361-D30B-4C6D-BA24-AA228AA2970E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75A53E08-63ED-43C7-BD5D-082671EFB70A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75A53E08-63ED-43C7-BD5D-082671EFB70A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75A53E08-63ED-43C7-BD5D-082671EFB70A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75A53E08-63ED-43C7-BD5D-082671EFB70A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7042EC2F-DEF9-4FF3-AEEF-97E8C2D0E60B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7042EC2F-DEF9-4FF3-AEEF-97E8C2D0E60B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7042EC2F-DEF9-4FF3-AEEF-97E8C2D0E60B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7042EC2F-DEF9-4FF3-AEEF-97E8C2D0E60B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0ABB4FEC-F694-489B-B68A-16EE475C5AB4}
+	EndGlobalSection
+EndGlobal
