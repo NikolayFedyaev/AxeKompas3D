@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AxeKompas.Model;
+using AxeKompas.Wrapper;
 
 namespace Axe3D
 {
@@ -28,16 +29,6 @@ namespace Axe3D
         /// </summary>
         private readonly Dictionary<TextBox, AxeParametersType> _textBoxToParameterType;
 
-        /// <summary>
-        /// Константа для корректного цвета. 
-        /// </summary>
-        private readonly Color _correctColor = Color.White;
-
-        /// <summary>
-        /// Константа для цвета ошибки.
-        /// </summary>
-        private readonly Color _errorColor = Color.LightCoral;
-
         public MainForm()
         {
             InitializeComponent();
@@ -49,8 +40,8 @@ namespace Axe3D
                 { AxeHeightTextBox, AxeParametersType.AxeHeight },
                 { AxePartHeightTextBox, AxeParametersType.AxePartHeight },
                 { AxeWidthTextBox, AxeParametersType.AxeWidth },
-                { AxePartFirstWidthTextBox, AxeParametersType.AxePartFirstWidth },
-                { AxePartSecondWidthTextBox, AxeParametersType.AxePartSecondWidth }
+                { AxePartFirstWidthTextBox, AxeParametersType.Rounding },
+                { AxePartSecondWidthTextBox, AxeParametersType.Thickness }
             };
             _textBoxAndError = new Dictionary<TextBox, string>
             {
@@ -63,91 +54,66 @@ namespace Axe3D
                 { AxePartSecondWidthTextBox, "" }
             };
         }
+
+ 
+
         /// <summary>
         /// Устанавливает значения по умолчанию при загрузке формы.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            SetDefaultValues(150, 58, 195, 150, 150, 25, 22);
-        }
-
         private void SetParameter(object sender, EventArgs e)
         {
             var textBox = sender as TextBox;
             var isType = _textBoxToParameterType.TryGetValue(textBox, out var type);
-            double.TryParse(textBox.Text, out var value);
+            var textValue = textBox.Text.Replace('.', ',');
+            double.TryParse(textValue, out var value);
+            value = Math.Round(value, 1);
+
             if (!isType) return;
+
             try
             {
                 _parameters.SetParameterValue(type, value);
                 _textBoxAndError[textBox] = "";
-                textBox.BackColor = _correctColor;
                 errorProvider.Clear();
             }
-            catch (Exception textBoxError)
+            catch (ArgumentOutOfRangeException error)
             {
-                _textBoxAndError[textBox] = textBoxError.Message;
-                textBox.BackColor = _errorColor;
-                errorProvider.SetError(textBox, textBoxError.Message);
+                _textBoxAndError[textBox] = error.ParamName;
+                errorProvider.SetError(textBox, error.ParamName);
             }
         }
 
         /// <summary>
         /// Устанавливает значения по умолчанию.
         /// </summary>
-        private void SetDefaultValues(int AxeLengthValue, int AxePartLengthValue,
-            int AxeHeightValue, int AxePartHeightValue, int AxeWidthValue, int AxePartFirstWidthValue, int AxePartSecondWidthValue)
+        /// <param name="axeLengthValue"></param>
+        /// <param name="axePartLengthValue"></param>
+        /// <param name="axeHeightValue"></param>
+        /// <param name="axePartHeightValue"></param>
+        /// <param name="axeWidthValue"></param>
+        /// <param name="axePartFirstWidthValue"></param>
+        /// <param name="axePartSecondWidthValue"></param>
+        private void SetDefaultValues(double axeLengthValue, double axePartLengthValue,
+            double axeHeightValue, double axePartHeightValue, double axeWidthValue, 
+            double axeroundingValue, double thicknessValue)
         {
-            _parameters.SetParameterValue(AxeParametersType.AxeLength, AxeLengthValue);
-            _parameters.SetParameterValue(AxeParametersType.AxePartLength, AxePartLengthValue);
-            _parameters.SetDefaultParameterValue(AxeParametersType.AxeHeight, AxeHeightValue);
-            _parameters.SetParameterValue(AxeParametersType.AxePartHeight, AxePartHeightValue);
-            _parameters.SetDefaultParameterValue(AxeParametersType.AxeWidth, AxeWidthValue);
-            _parameters.SetParameterValue(AxeParametersType.AxePartFirstWidth, AxePartFirstWidthValue);
-            _parameters.SetParameterValue(AxeParametersType.AxePartSecondWidth, AxePartSecondWidthValue);
+            _parameters.SetParameterValue(AxeParametersType.AxeLength, axeLengthValue);
+            _parameters.SetParameterValue(AxeParametersType.AxePartLength, axePartLengthValue);
+            _parameters.SetParameterValue(AxeParametersType.AxeHeight, axeHeightValue);
+            _parameters.SetParameterValue(AxeParametersType.AxePartHeight, axePartHeightValue);
+            _parameters.SetParameterValue(AxeParametersType.AxeWidth, axeWidthValue);
+            _parameters.SetParameterValue(AxeParametersType.Rounding, axeroundingValue);
+            _parameters.SetParameterValue(AxeParametersType.Thickness, thicknessValue);
 
-            AxeLengthTextBox.Text = AxeLengthValue.ToString();
-            AxePartLengthTextBox.Text = AxePartLengthValue.ToString();
-            AxeHeightTextBox.Text = AxeHeightValue.ToString();
-            AxePartHeightTextBox.Text = AxePartHeightValue.ToString();
-            AxeWidthTextBox.Text = AxeWidthValue.ToString();
-            AxePartFirstWidthTextBox.Text = AxePartFirstWidthValue.ToString();
-            AxePartSecondWidthTextBox.Text = AxePartSecondWidthValue.ToString();
-        }
-
-        /// <summary>
-        /// Устанавливает минимальные размеры.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MinimumButton_Click(object sender, EventArgs e)
-        {
-            SetDefaultValues(135, 48, 215, 135, 165, 22, 19);
-        }
-
-        /// <summary>
-        /// Устанавливает средние размеры.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// 
-        private void AverageButton_Click(object sender, EventArgs e)
-        {
-            SetDefaultValues(150, 58, 170, 135, 135, 22, 19);
-        }
-
-        /// <summary>
-        /// Устанавливает максимальные размеры.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
-
-        private void MaximumButton_Click(object sender, EventArgs e)
-        {
-            SetDefaultValues(165, 68, 215, 165, 165, 28, 25);
+            AxeLengthTextBox.Text = axeLengthValue.ToString();
+            AxePartLengthTextBox.Text = axePartLengthValue.ToString();
+            AxeHeightTextBox.Text = axeHeightValue.ToString();
+            AxePartHeightTextBox.Text = axePartHeightValue.ToString();
+            AxeWidthTextBox.Text = axeWidthValue.ToString();
+            AxePartFirstWidthTextBox.Text = axeroundingValue.ToString();
+            AxePartSecondWidthTextBox.Text = thicknessValue.ToString();
         }
 
         /// <summary>
@@ -176,12 +142,51 @@ namespace Axe3D
             if (CheckTextBoxes())
             {
                 var builder = new AxeBuilder();
-                builder.BuildDetail(_parameters);
+                builder.BuildAxe(_parameters);
             }
             else
             {
-                MessageBox.Show("Fill All Required Parameters Correctly");
+                MessageBox.Show(@"Fill all required parameters correctly",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+        
+        /// <summary>
+        /// Устанавливает минимальные размеры.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MinimumButton_Click(object sender, EventArgs e)
+        {
+            SetDefaultValues(135, 48, 170, 135, 135, 5, 50);
+        }
+
+        /// <summary>
+        /// Устанавливает средние размеры.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
+        private void AverageButton_Click(object sender, EventArgs e)
+        {
+            SetDefaultValues(150, 58, 195, 150, 150, 10, 60);
+        }
+
+        /// <summary>
+        /// Устанавливает максимальные размеры.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+
+        private void MaximumButton_Click(object sender, EventArgs e)
+        {
+            SetDefaultValues(165, 68, 215, 165, 165, 15, 70);
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
 
         }
     }

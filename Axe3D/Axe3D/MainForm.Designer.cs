@@ -36,6 +36,7 @@ namespace Axe3D
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -63,7 +64,9 @@ namespace Axe3D
             this.MinimumButton = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.BuildButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label14
@@ -91,9 +94,10 @@ namespace Axe3D
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(11, 396);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 13);
+            this.label5.Size = new System.Drawing.Size(56, 13);
             this.label5.TabIndex = 24;
-            this.label5.Text = "Axe Part Second Width";
+            this.label5.Text = "Thickness";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label12
             // 
@@ -110,9 +114,9 @@ namespace Axe3D
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 335);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 13);
+            this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 19;
-            this.label2.Text = "Axe Part First Width";
+            this.label2.Text = "Rounding";
             // 
             // label7
             // 
@@ -298,7 +302,7 @@ namespace Axe3D
             // BuildButton
             // 
             this.BuildButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildButton.Location = new System.Drawing.Point(330, 473);
+            this.BuildButton.Location = new System.Drawing.Point(303, 473);
             this.BuildButton.Name = "BuildButton";
             this.BuildButton.Size = new System.Drawing.Size(75, 23);
             this.BuildButton.TabIndex = 41;
@@ -306,11 +310,22 @@ namespace Axe3D
             this.BuildButton.UseVisualStyleBackColor = true;
             this.BuildButton.Click += new System.EventHandler(this.BuildButton_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(406, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(409, 455);
+            this.pictureBox1.TabIndex = 42;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(858, 508);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.BuildButton);
             this.Controls.Add(this.MaximumButton);
             this.Controls.Add(this.AverageButton);
@@ -340,6 +355,7 @@ namespace Axe3D
             this.Name = "MainForm";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,6 +390,7 @@ namespace Axe3D
         private Button MinimumButton;
         private ErrorProvider errorProvider;
         private Button BuildButton;
+        private PictureBox pictureBox1;
     }
 }
 

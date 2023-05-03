@@ -21,8 +21,8 @@ namespace AxeKompas.Model
                 { AxeParametersType.AxeHeight, new AxeParameter(195, 170, 215) },
                 { AxeParametersType.AxePartHeight, new AxeParameter(150, 135, 165) },
                 { AxeParametersType.AxeWidth, new AxeParameter(150, 135, 165) },
-                { AxeParametersType.AxePartFirstWidth, new AxeParameter(25, 22, 28) },
-                { AxeParametersType.AxePartSecondWidth, new AxeParameter(22, 19, 25) },
+                { AxeParametersType.Rounding, new AxeParameter(10, 5, 15) },
+                { AxeParametersType.Thickness, new AxeParameter(60, 50, 70) },
             };
         }
 
@@ -31,37 +31,23 @@ namespace AxeKompas.Model
         /// </summary>
         /// <param name="type"></param>
         /// <param name="value"></param>
-        /// 
-
         public void SetParameterValue(AxeParametersType type, double value)
         {
+            var parameter = _parameters[type];
             CheckDependencies(type, value);
-            _parameters[type].Value = value;
-        }
-
-
-        /// <summary>
-        /// Устанавливает значение параметра по умолчанию.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="value"></param>
-
-        public void SetDefaultParameterValue(AxeParametersType type, int value)
-        {
-            CheckDependencies(type, value);
-            _parameters[type].Value = value;
+            parameter.Value = value;
         }
 
         /// <summary>
-        /// Получает значения параметров.
+        /// Gets parameter value.
         /// </summary>
-        /// <param name="type">Тип параметра</param>
-        /// <returns>Значение параметра</returns>
+        /// <param name="type">Spinner parameter type.</param>
+        /// <returns>Parameter value.</returns>
+        /// <exception cref="Exception">If parameter value does not exist.</exception>
         public double GetParameterValue(AxeParametersType type)
         {
             return _parameters[type].Value;
         }
-
 
         /// <summary>
         /// Проверка зависимых параметров.
@@ -71,49 +57,25 @@ namespace AxeKompas.Model
         /// <exception cref="Exception">Если значение параметра некорректное.</exception>
         private void CheckDependencies(AxeParametersType type, double value)
         {
-            switch (type)
+            if (type == AxeParametersType.AxePartHeight)
             {
-                case AxeParametersType.AxeLength:
-                    {
-                        _parameters.TryGetValue(AxeParametersType.AxePartLength, out var parameter);
-                        if (value - parameter.Value < 100)
-                        {
-                            throw new ArgumentOutOfRangeException("AxeLength");
-                        }
-                        break;
-                    }
-                case AxeParametersType.AxeHeight:
-                    {
-                        _parameters.TryGetValue(AxeParametersType.AxePartHeight, out var parameter);
-                        if (parameter.Value - value < 10)
-                        {
-                            throw new ArgumentOutOfRangeException("3");
-                        }
-                        break;
-                    }
-                case AxeParametersType.AxeWidth:
-                    {
-                        _parameters.TryGetValue(AxeParametersType.AxePartFirstWidth, out var parameter);
-                        if (value - parameter.Value < 10)
-                        {
-                            throw new ArgumentOutOfRangeException("4");
-                        }
-                        break;
-                    }
-                case AxeParametersType.AxePartSecondWidth:
-                    {
-                        _parameters.TryGetValue(AxeParametersType.AxeWidth, out var parameter);
-                        if (value - parameter.Value < 10)
-                        {
-                            throw new ArgumentOutOfRangeException("5");
-                        }
-                        break;
-                    }
-                default:
-                    {
-                        return;
-                    }
+                _parameters.TryGetValue(AxeParametersType.AxeHeight, out var parameter);
+                if (value > 0.83 * parameter.Value || value < 0.66 * parameter.Value)
+                {
+                    throw new ArgumentOutOfRangeException("Высота части не может быть" +
+                        "больше 1/12 или меньше 1/15 высоты топора");
+                }
             }
+            if (type == AxeParametersType.AxePartLength)
+            {
+                _parameters.TryGetValue(AxeParametersType.AxeLength, out var parameter);
+                if (value < 100 - parameter.Value)
+                {
+                    throw new ArgumentOutOfRangeException("Длина части не может быть" +
+                        "больше длиннее или короче длины топора топора");
+                }
+            }
+            
         }
     }
 }

@@ -28,16 +28,16 @@
         ///<sumary>
         /// Ширина топора
         /// </sumary>
-        AxeWidth,            
+        AxeWidth,
 
         ///<sumary>
         /// Ширина первой части топора
         /// </sumary>
-        AxePartFirstWidth,
+        Rounding,
 
         ///<sumary>
-        /// Ширина второй части топора
+        /// Толщина
         /// </sumary>
-        AxePartSecondWidth
+        Thickness
     }
 }

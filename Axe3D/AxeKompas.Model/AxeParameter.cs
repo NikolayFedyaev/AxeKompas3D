@@ -19,6 +19,19 @@ namespace AxeKompas.Model
         private readonly double _maxValue;
 
         /// <summary>
+        /// AxeParameter constructor.
+        /// </summary>
+        /// <param name="value">Parameter value.</param>
+        /// <param name="minValue">Minimum allowed parameter value.</param>
+        /// <param name="maxValue">Maximum allowed parameter value.</param>
+        public AxeParameter(double value, double minValue, double maxValue)
+        {
+            _minValue = minValue;
+            _maxValue = maxValue;
+            Value = value;
+        }
+
+        /// <summary>
         /// Устанавливает и возвращает значение установленного парамера.
         /// </summary>
         public double Value
@@ -32,18 +45,6 @@ namespace AxeKompas.Model
                 }
                 _value = value;
             }
-        }
-        /// <summary>
-        /// Сборка класса параметра.
-        /// </summary>
-        /// <param name="value">Значение параметра.</param>
-        /// <param name="minValue">Минимально допустимое значение.</param>
-        /// <param name="maxValue">Максимально допустимое значение.</param>
-        public AxeParameter(int value, int minValue, int maxValue)
-        {
-            _minValue = minValue;
-            _maxValue = maxValue;
-            Value = value;
         }
         /// <summary>
         /// Проверяет допустимость значения параметра.
