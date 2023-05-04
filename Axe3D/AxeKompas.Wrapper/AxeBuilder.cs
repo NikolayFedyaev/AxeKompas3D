@@ -59,16 +59,14 @@ namespace AxeKompas.Wrapper
             var arc2 = new Point2D(axePartLength + 3, 0);
             var st3 = new Point2D(axeWidth, -axeLength);
             var st4 = new Point2D(axeWidth, axeLength);
+            var ty = new Point2D(-1, 0);
             short dir = -1;
 
 
             sketch.CreateLineSeg(start, end, 3);
 
-            sketch.CreateCircle(end1, 20, 1);
-
             sketch.CreateCircle(arc1, 20, 1);
-            
-
+         
 
             sketch.CreateLineSeg(start, end1, 3);
 

@@ -79,6 +79,10 @@ namespace AxeKompas.Wrapper
         {
             _document2D.ksCircle(center.X, center.Y, radius, style);
         }
+        public void CreateCircle2(double radius, Point2D center, int style)
+        {
+            _document2D.ksCircle(radius, center.X, center.Y, style);
+        }
 
         /// <summary>
         /// Creates an arc by three points on the sketch
